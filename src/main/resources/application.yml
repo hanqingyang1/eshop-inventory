@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: eshop-inventory
+  datasource:
+    url: jdbc:mysql://localhost:3306/eshop
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.25.139
+    port: 6379
