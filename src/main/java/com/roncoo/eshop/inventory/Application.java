@@ -1,5 +1,6 @@
 package com.roncoo.eshop.inventory;
 
+import com.roncoo.eshop.inventory.listener.InitListener;
 import com.sun.org.apache.bcel.internal.generic.RET;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -8,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -68,6 +70,17 @@ public class Application {
     @Bean
     public PlatformTransactionManager transactionManager(){
         return new DataSourceTransactionManager(dataSource());
+    }
+
+    /**
+     * 注册初始化监听器
+     * @return
+     */
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean(){
+        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitListener());
+        return servletListenerRegistrationBean;
     }
 //
 //    @Bean
